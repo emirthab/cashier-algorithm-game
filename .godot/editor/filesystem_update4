@@ -1,0 +1,10 @@
+res://game.tscn
+res://objects/money.tscn
+res://objects/case.tscn
+res://assets/moneys/dollar.tscn
+res://assets/moneys/coin.tscn
+res://assets/moneys/dollar_model.tscn
+res://assets/moneys/coin_model.tscn
+res://assets/case/dynamic_mat.tres
+res://scripts/case.gd
+res://scripts/cashier_algorithm.gd

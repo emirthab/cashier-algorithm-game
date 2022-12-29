@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dctdl6djx5p8w"]
+
+[ext_resource type="Texture2D" uid="uid://83fi2jx7xeop" path="res://assets/moneys/fifty_dollar.png" id="1_poum8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1d2lx"]
+shading_mode = 0
+albedo_texture = ExtResource("1_poum8")
+uv1_scale = Vector3(1, -1, 1)
+
+[node name="dollar" type="CSGBox3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
+size = Vector3(0.308852, 0.00746996, 0.146606)
+material = SubResource("StandardMaterial3D_1d2lx")

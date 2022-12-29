@@ -1,13 +1,9 @@
 extends Node
-func _ready():
-	var coins = [10, 5, 4, 3, 2, 1, 0.5,0.5, 0.25]
-	coins = convert_coins_dict(coins)
-	var change = 10
-	var combinations = give_change(change, coins)
-	var sorted = sort_arrays_by_size(combinations)
-	print(get_combinations_productivity(combinations))
 
-func give_change(remaining_amount: float, coins : Array , combinations: Array =[]):
+func _ready():
+	pass
+
+static func give_change(remaining_amount: float, coins : Array , combinations: Array =[]):
 	if remaining_amount == 0:
 		var combination : Array = []
 		for coin in coins:
@@ -24,7 +20,7 @@ func give_change(remaining_amount: float, coins : Array , combinations: Array =[
 		coin['used'] = false
 	return combinations
 
-func convert_coins_dict(coins: Array) -> Array:
+static func convert_coins_dict(coins: Array) -> Array:
 	var new_list : Array = []
 	for coin in coins:
 		new_list.append({
@@ -33,7 +29,7 @@ func convert_coins_dict(coins: Array) -> Array:
 		})
 	return new_list
 
-func sort_arrays_by_size(arrays: Array):
+static func sort_arrays_by_size(arrays: Array):
 	for i in range(0, arrays.size()):
 		for j in range(i+1, arrays.size()):
 			if arrays[i].size() > arrays[j].size():
@@ -41,7 +37,7 @@ func sort_arrays_by_size(arrays: Array):
 				arrays[i] = arrays[j]
 				arrays[j] = temp
 
-func get_combinations_productivity(combinations : Array):
+static func get_combinations_productivity(combinations : Array):
 	var new_list : Array = []
 	for i in range(0, combinations.size()):
 		var productivity : float = (float(combinations.size()) - i) / combinations.size() * 100
