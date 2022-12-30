@@ -14,3 +14,9 @@ config/name="demo"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1270
+window/handheld/orientation=1

@@ -5,3 +5,17 @@
 [node name="Game" type="Node3D"]
 
 [node name="case" parent="." instance=ExtResource("1_7nih5")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.602804, 0.797889, 0, -0.797889, 0.602804, 0.35475, 1.91618, 1.08036)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.176758, 0.984254, 0, -0.984254, -0.176758, 0, 5.48884, 0)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
