@@ -1,16 +1,254 @@
-[gd_scene load_steps=2 format=3 uid="uid://mbck7dqouchk"]
+[gd_scene load_steps=24 format=3 uid="uid://mbck7dqouchk"]
 
-[ext_resource type="PackedScene" uid="uid://bualwqojbume1" path="res://objects/case.tscn" id="1_7nih5"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_5bxke"]
+[ext_resource type="PackedScene" uid="uid://j2uwwpn6htdo" path="res://objects/case.tscn" id="1_7nih5"]
+[ext_resource type="Texture2D" uid="uid://c1tpmmpmct4v6" path="res://assets/texture_14.png" id="2_gqyp0"]
+[ext_resource type="Texture2D" uid="uid://c6iee7pfl8ise" path="res://assets/texture_13.png" id="2_ly3pp"]
+[ext_resource type="Texture2D" uid="uid://bl5wg84sbb6mr" path="res://assets/texture_orange.png" id="3_jigam"]
+[ext_resource type="Texture2D" uid="uid://prm7mvy5mmn4" path="res://assets/texture_01.png" id="4_5cc4y"]
+[ext_resource type="PackedScene" uid="uid://cwsk8canhfgrw" path="res://assets/man.tscn" id="4_bbkr8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_328lt"]
+sky_horizon_color = Color(0.638407, 0.657618, 0.681618, 1)
+ground_bottom_color = Color(0.168627, 0.176471, 0.176471, 1)
+ground_horizon_color = Color(0.638407, 0.657618, 0.681618, 1)
+
+[sub_resource type="Sky" id="Sky_p3m8j"]
+sky_material = SubResource("ProceduralSkyMaterial_328lt")
+
+[sub_resource type="Environment" id="Environment_kjs6p"]
+background_mode = 2
+sky = SubResource("Sky_p3m8j")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_tdpg0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("case/dynamic:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.224)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.427606, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qoxu6"]
+resource_name = "camera_init"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.427204, 0, 0), Vector3(-0.923785, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("case/dynamic:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.2235), Vector3(0, 0, -0.50683)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct4d4"]
+_data = {
+"RESET": SubResource("Animation_tdpg0"),
+"camera_init": SubResource("Animation_qoxu6")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pis3i"]
+albedo_color = Color(0.517647, 0.333333, 0.0627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uctmc"]
+albedo_texture = ExtResource("3_jigam")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2m4v"]
+albedo_texture = ExtResource("2_gqyp0")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e65o4"]
+albedo_texture = ExtResource("3_jigam")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r657n"]
+albedo_texture = ExtResource("3_jigam")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nert6"]
+albedo_texture = ExtResource("4_5cc4y")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sun2"]
+albedo_color = Color(0.478431, 0.282353, 0.121569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fj8c"]
+albedo_texture = ExtResource("2_ly3pp")
+uv1_triplanar = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_dac66"]
+font_size = 36
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b2lvl"]
+font_size = 36
 
 [node name="Game" type="Node3D"]
-
-[node name="case" parent="." instance=ExtResource("1_7nih5")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.602804, 0.797889, 0, -0.797889, 0.602804, 0.35475, 1.91618, 1.08036)
+script = ExtResource("1_5bxke")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.176758, 0.984254, 0, -0.984254, -0.176758, 0, 5.48884, 0)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 9.14901, -7.96283)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kjs6p")
+
+[node name="case" parent="." instance=ExtResource("1_7nih5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06932, 0)
+
+[node name="dynamic" parent="case" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.224)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.909961, 0.414693, 0, -0.414693, 0.909961, 0.35475, 2.9855, 1.08036)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ct4d4")
+}
+
+[node name="blockout" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06932, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305062, -0.500682, -0.0976207)
+material_override = SubResource("StandardMaterial3D_pis3i")
+size = Vector3(5.80716, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.03917, -0.153642, -10.1198)
+material_override = SubResource("StandardMaterial3D_uctmc")
+size = Vector3(5.45964, 1.80077, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.46053, -0.153642, -10.1198)
+material_override = SubResource("StandardMaterial3D_k2m4v")
+size = Vector3(5.45964, 1.80077, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.845216, -0.153642, -10.1198)
+material_override = SubResource("StandardMaterial3D_e65o4")
+size = Vector3(5.45964, 1.80077, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.30468, -0.153642, -10.1198)
+material_override = SubResource("StandardMaterial3D_k2m4v")
+size = Vector3(5.45964, 1.80077, 1)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.86321, -0.153642, -10.1198)
+material_override = SubResource("StandardMaterial3D_r657n")
+size = Vector3(5.45964, 1.80077, 1)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.232049, 2.20557, -19.5619)
+material_override = SubResource("StandardMaterial3D_nert6")
+size = Vector3(27.3333, 12.6583, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.13679, -0.153642, -10.1198)
+material_override = SubResource("StandardMaterial3D_k2m4v")
+size = Vector3(5.45964, 1.80077, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305062, -0.912866, -0.0363524)
+material_override = SubResource("StandardMaterial3D_7sun2")
+size = Vector3(5.80716, 0.272185, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.242864, -1.14956, -7.55915)
+size = Vector3(23.2494, 0.188223, 24.247)
+material = SubResource("StandardMaterial3D_8fj8c")
+
+[node name="man" parent="." instance=ExtResource("4_bbkr8")]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0.31278, 0.0174927, -1.51233)
+
+[node name="Armature" parent="man" index="0"]
+transform = Transform3D(0.0992898, -0.00387158, 0.0112493, 0.011503, 0.00711232, -0.0990812, 0.00303592, 0.0996717, 0.00750715, 0.894671, -0.533684, 0.701932)
+
+[node name="Skeleton3D" parent="man/Armature" index="0"]
+bones/1/rotation = Quaternion(0.00563958, -0.00983339, 0.0534292, 0.998507)
+bones/2/rotation = Quaternion(0.079438, -0.00493374, 0.0163413, 0.996694)
+bones/3/rotation = Quaternion(0.227676, -0.000184764, 0.0171885, 0.973585)
+bones/4/rotation = Quaternion(0.0315766, 0.000954506, 3.86609e-05, 0.999501)
+bones/5/rotation = Quaternion(-0.153707, 0.000935449, 0.000191974, 0.988116)
+bones/6/rotation = Quaternion(0.917367, 0.000688046, -0.000662619, 0.398042)
+bones/7/rotation = Quaternion(-0.000952975, -0.9233, 0.384079, 7.23222e-05)
+bones/8/rotation = Quaternion(-0.0869934, 0.000390802, 0.000871663, 0.996208)
+bones/16/rotation = Quaternion(-0.143831, -0.13845, -0.73387, 0.649291)
+bones/17/rotation = Quaternion(-0.00265874, -0.39229, -0.0711639, 0.917081)
+bones/18/rotation = Quaternion(0.799797, -0.00435435, -0.136466, 0.584537)
+bones/19/rotation = Quaternion(-0.0637342, 0.370869, 0.197911, 0.905111)
+bones/20/rotation = Quaternion(0.337133, 0.834887, 0.393047, 0.186596)
+bones/21/rotation = Quaternion(0.262798, -0.05935, -0.118643, 0.955687)
+bones/23/rotation = Quaternion(0.0710284, 0.472427, -0.0465225, 0.877271)
+bones/24/rotation = Quaternion(0.219276, 0.00275063, 0.0357371, 0.975004)
+bones/26/rotation = Quaternion(0.0681786, 0.416108, -0.0509098, 0.905325)
+bones/27/rotation = Quaternion(0.221329, 0.00151472, 0.00752673, 0.975169)
+bones/29/rotation = Quaternion(0.0624041, 0.31239, -0.0585441, 0.946092)
+bones/30/rotation = Quaternion(0.21674, 0.000818048, -0.0418064, 0.975333)
+bones/32/rotation = Quaternion(0.0674054, 0.397448, -0.0520114, 0.913666)
+bones/33/rotation = Quaternion(0.22117, 0.00102784, -0.00165225, 0.975233)
+bones/35/rotation = Quaternion(-0.119912, 0.074927, 0.714768, 0.684918)
+bones/36/rotation = Quaternion(0.146418, 0.485912, 0.0932999, 0.85659)
+bones/37/rotation = Quaternion(0.676362, -0.00113647, 0.0471147, 0.73506)
+bones/38/rotation = Quaternion(0.0875033, -0.498947, -0.030406, 0.861667)
+bones/39/rotation = Quaternion(-0.338381, 0.826831, 0.407356, -0.1895)
+bones/40/rotation = Quaternion(0.275538, 0.061714, 0.128841, 0.950616)
+bones/42/rotation = Quaternion(0.0657552, -0.472725, 0.0424033, 0.87773)
+bones/43/rotation = Quaternion(0.218356, -0.00275085, -0.040274, 0.975034)
+bones/45/rotation = Quaternion(0.0631549, -0.416376, 0.046405, 0.905809)
+bones/46/rotation = Quaternion(0.220813, -0.00151492, -0.0121194, 0.97524)
+bones/48/rotation = Quaternion(0.0582271, -0.312493, 0.0522736, 0.946692)
+bones/49/rotation = Quaternion(0.217361, -0.000817707, 0.0372468, 0.97538)
+bones/51/rotation = Quaternion(0.0624468, -0.397705, 0.0472991, 0.914163)
+bones/52/rotation = Quaternion(0.220993, -0.00102822, -0.00295398, 0.97527)
+bones/54/rotation = Quaternion(0.875512, -0.0472704, -0.480874, 0.00219776)
+bones/55/rotation = Quaternion(0.324147, 0.316499, -0.118417, 0.883592)
+bones/56/rotation = Quaternion(-0.751581, 0.0888939, -0.0550723, 0.6513)
+bones/58/rotation = Quaternion(0.88638, -0.191976, 0.399231, 0.134497)
+bones/59/rotation = Quaternion(0.329473, -0.3164, 0.114695, 0.882147)
+bones/60/rotation = Quaternion(-0.731916, -0.0749097, -0.119918, 0.666564)
+
+[node name="AnimationPlayer" parent="man" index="1"]
+autoplay = "idle"
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -19,3 +257,38 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.505
+anchor_top = 0.132
+anchor_right = 0.505
+anchor_bottom = 0.132
+offset_left = -292.6
+offset_top = -43.64
+offset_right = 307.4
+offset_bottom = 48.36
+text = "TAP TO START"
+label_settings = SubResource("LabelSettings_dac66")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.505
+anchor_top = 0.209
+anchor_right = 0.511
+anchor_bottom = 0.209
+offset_left = -295.6
+offset_top = -45.43
+offset_right = 300.08
+offset_bottom = 46.57
+text = "Give Change : $14.50"
+label_settings = SubResource("LabelSettings_b2lvl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="case"]
+[editable path="man"]

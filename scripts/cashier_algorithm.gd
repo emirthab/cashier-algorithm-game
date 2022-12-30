@@ -1,8 +1,5 @@
 extends Node
 
-func _ready():
-	pass
-
 static func give_change(remaining_amount: float, coins : Array , combinations: Array =[]):
 	if remaining_amount == 0:
 		var combination : Array = []
