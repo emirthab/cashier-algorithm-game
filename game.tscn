@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://mbck7dqouchk"]
+[gd_scene load_steps=32 format=3 uid="uid://mbck7dqouchk"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_5bxke"]
 [ext_resource type="PackedScene" uid="uid://j2uwwpn6htdo" path="res://objects/case.tscn" id="1_7nih5"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bl5wg84sbb6mr" path="res://assets/texture_orange.png" id="3_jigam"]
 [ext_resource type="Texture2D" uid="uid://prm7mvy5mmn4" path="res://assets/texture_01.png" id="4_5cc4y"]
 [ext_resource type="PackedScene" uid="uid://cwsk8canhfgrw" path="res://assets/man.tscn" id="4_bbkr8"]
+[ext_resource type="Texture2D" uid="uid://ckky3yiyrcxym" path="res://assets/star.png" id="8_qayju"]
+[ext_resource type="Texture2D" uid="uid://1l863yxqd04s" path="res://assets/vomit.png" id="9_jcoda"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_328lt"]
 sky_horizon_color = Color(0.638407, 0.657618, 0.681618, 1)
@@ -77,10 +79,26 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, -1.2235), Vector3(0, 0, -0.50683)]
 }
 
+[sub_resource type="Animation" id="Animation_alp26"]
+resource_name = "end_game"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.923785, 0, 0), Vector3(-0.427606, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ct4d4"]
 _data = {
 "RESET": SubResource("Animation_tdpg0"),
-"camera_init": SubResource("Animation_qoxu6")
+"camera_init": SubResource("Animation_qoxu6"),
+"end_game": SubResource("Animation_alp26")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pis3i"]
@@ -114,11 +132,41 @@ albedo_texture = ExtResource("2_ly3pp")
 uv1_triplanar = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_dac66"]
-font_size = 36
+font_size = 48
 font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b2lvl"]
-font_size = 36
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_a54g4"]
+font_size = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsw55"]
+bg_color = Color(1, 0.968627, 0.811765, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_tao2k"]
+font_size = 48
+font_color = Color(1, 0.776471, 0.176471, 1)
+outline_size = 4
+outline_color = Color(1, 0.776471, 0.176471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nysc8"]
+bg_color = Color(0.760784, 0.760784, 0.760784, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4hrs"]
+bg_color = Color(0.403922, 0.788235, 0.101961, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_5bxke")
@@ -274,7 +322,7 @@ label_settings = SubResource("LabelSettings_dac66")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UI"]
+[node name="Change" type="Label" parent="UI"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.505
@@ -289,6 +337,101 @@ text = "Give Change : $14.50"
 label_settings = SubResource("LabelSettings_b2lvl")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="UI_END" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="UI_END"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.505
+anchor_top = 0.132
+anchor_right = 0.505
+anchor_bottom = 0.132
+offset_left = -292.6
+offset_top = -43.64
+offset_right = 307.4
+offset_bottom = 48.36
+text = "TAP TO PLAY AGAIN"
+label_settings = SubResource("LabelSettings_a54g4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI_END"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.502
+anchor_top = 0.252
+anchor_right = 0.502
+anchor_bottom = 0.252
+offset_left = -431.98
+offset_top = -146.52
+offset_right = 431.02
+offset_bottom = 146.48
+theme_override_styles/panel = SubResource("StyleBoxFlat_bsw55")
+
+[node name="Star" type="TextureRect" parent="UI_END"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.851
+anchor_top = 0.282
+anchor_right = 0.851
+anchor_bottom = 0.283
+offset_left = -58.4899
+offset_top = -57.32
+offset_right = 441.51
+offset_bottom = 440.92
+scale = Vector2(0.233, 0.233)
+texture = ExtResource("8_qayju")
+
+[node name="Vomit" type="TextureRect" parent="UI_END"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.282
+anchor_right = 0.15
+anchor_bottom = 0.282
+offset_left = -58.5
+offset_top = -58.32
+offset_right = 441.5
+offset_bottom = 441.68
+scale = Vector2(0.2325, 0.2325)
+texture = ExtResource("9_jcoda")
+
+[node name="Label" type="Label" parent="UI_END"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.514
+anchor_top = 0.222
+anchor_right = 0.514
+anchor_bottom = 0.222
+offset_left = -237.86
+offset_top = -35.72
+offset_right = 237.14
+offset_bottom = 34.28
+text = "YOUR SUCCESS RATE"
+label_settings = SubResource("LabelSettings_tao2k")
+
+[node name="ProgressBar" type="ProgressBar" parent="UI_END"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.498
+anchor_top = 0.284
+anchor_right = 0.498
+anchor_bottom = 0.284
+offset_left = -291.02
+offset_top = -16.84
+offset_right = 290.98
+offset_bottom = 17.16
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_nysc8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f4hrs")
 
 [editable path="case"]
 [editable path="man"]

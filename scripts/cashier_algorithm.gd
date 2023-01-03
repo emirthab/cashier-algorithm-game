@@ -5,7 +5,7 @@ static func give_change(remaining_amount: float, coins : Array , combinations: A
 		var combination : Array = []
 		for coin in coins:
 			if coin['used']: 
-				combination.append(coin.amount)
+				combination.append(float(coin.amount))
 		if combination not in combinations: 
 			combinations.append(combination)
 		return

@@ -1,1 +1,5 @@
+res://objects/case.tscn
 res://game.tscn
+res://scripts/case.gd
+res://scripts/game.gd
+res://scripts/cashier_algorithm.gd
